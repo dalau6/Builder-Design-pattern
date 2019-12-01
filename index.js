@@ -1,5 +1,5 @@
 class Frog {
-  constructor(name, gender, eyes, legs, scent, tongue, heart, weight, height) {
+  constructor(name, gender, eyes, legs, scent, tongue, heart, habitat, skin, weight, height) {
     if (!Array.isArray(legs)) {
       throw new Error('Parameter "legs" is not an array');
     }
@@ -26,6 +26,8 @@ class Frog {
       this.tongue = newTongue;
     }
     this.heart = heart;
+    this.habitat = habitat;
+    this.skin = skin;
     if (typeof weight !== "undefined") {
       this.weight = weight;
     }
@@ -97,6 +99,14 @@ class FrogBuilder {
     this.heart = heart;
     return this;
   }
+  setHabitat(habitat) {
+    this.habitat = habitat;
+    return this;
+  }
+  setSkin(skin) {
+    this.skin = skin;
+    return this;
+  }
   setWeight(weight) {
     if (typeof weight !== "undefined") {
       this.weight = weight;
@@ -158,6 +168,8 @@ class FrogBuilder {
         this.scent,
         this.tongue,
         this.heart,
+        this.habitat,
+        this.skin,
         this.weight,
         this.height
       );
@@ -168,20 +180,74 @@ class FrogBuilder {
   }
 }
 
-const larry = new FrogBuilder("larry", "male")
+// frog
+const sally = new FrogBuilder("sally", "female")
   .setEyes([{ volume: 1.1 }, { volume: 1.12 }])
-  .setScent("sweaty socks")
-  .setHeart({ rate: 22 })
-  .setWeight(6)
-  .setHeight(3.5)
+  .setScent("blueberry")
+  .setHeart({ rate: 12 })
+  .setWeight(5)
+  .setHeight(3.1)
   .setLegs([
     { size: "small" },
     { size: "small" },
     { size: "small" },
     { size: "small" }
   ])
-  .setTongue({ tongueWidth: 18, color: "dark red", type: "round" })
+  .setTongue({ width: 12, color: "navy blue", type: "round" })
+  .setHabitat("water")
+  .setSkin("oily")
   .build();
+
+// toad
+const kelly = new FrogBuilder("kelly", "female")
+  .setEyes([{ volume: 1.1 }, { volume: 1.12 }])
+  .setScent("black ice")
+  .setHeart({ rate: 11 })
+  .setWeight(5)
+  .setHeight(3.1)
+  .setLegs([
+    { size: "small" },
+    { size: "small" },
+    { size: "small" },
+    { size: "small" }
+  ])
+  .setTongue({ width: 12.5, color: "olive", type: "round" })
+  .setHabitat("land")
+  .setSkin("dry")
+  .build();
+
+// toad
+const mike = new FrogBuilder("mike", "male")
+  .setEyes([{ volume: 1.1 }, { volume: 1.12 }])
+  .setScent("smelly socks")
+  .setHeart({ rate: 15 })
+  .setWeight(12)
+  .setHeight(5.2)
+  .setLegs([
+    { size: "medium" },
+    { size: "medium" },
+    { size: "medium" },
+    { size: "medium" }
+  ])
+  .setTongue({ width: 12.5, color: "olive", type: "round" })
+  .setHabitat("land")
+  .setSkin("dry")
+  .build();
+
+// const larry = new FrogBuilder("larry", "male")
+//   .setEyes([{ volume: 1.1 }, { volume: 1.12 }])
+//   .setScent("sweaty socks")
+//   .setHeart({ rate: 22 })
+//   .setWeight(6)
+//   .setHeight(3.5)
+//   .setLegs([
+//     { size: "small" },
+//     { size: "small" },
+//     { size: "small" },
+//     { size: "small" }
+//   ])
+//   .setTongue({ tongueWidth: 18, color: "dark red", type: "round" })
+//   .build();
 
 // // variation 1 (left eye = index 1, right eye = index 2)
 // larry.setEyes([{ volume: 1 }, { volume: 1.2 }]);
