@@ -182,3 +182,41 @@ const larry = new FrogBuilder("larry", "male")
   ])
   .setTongue({ tongueWidth: 18, color: "dark red", type: "round" })
   .build();
+
+// // variation 1 (left eye = index 1, right eye = index 2)
+// larry.setEyes([{ volume: 1 }, { volume: 1.2 }]);
+
+// // variation 2 (left eye + right eye = same values)
+// larry.setEyes(1.1);
+
+// // variation 3 (the caller calls the shots on calculating the left and right eyes)
+// larry.setEyes(function(instance) {
+//   let leftEye, rightEye;
+//   let weight, height;
+//   if ("weight" in instance) {
+//     weight = instance.weight;
+//   }
+//   if ("height" in instance) {
+//     height = instance.height;
+//   }
+//   if (weight > 10) {
+//     // It's a fat frog. Their eyes are probably humongous!
+//     leftEye = { volume: 5 };
+//     rightEye = { volume: 5 };
+//   } else {
+//     const volume = someApi.getVolume(weight, height);
+//     leftEye = { volume };
+//     // Assuming that female frogs have shorter right eyes for some odd reason
+//     rightEye = { volume: instance.gender === "female" ? 0.8 : 1 };
+//   }
+//   return {
+//     left: leftEye,
+//     right: rightEye
+//   };
+// });
+
+// // variation 4 (caller decides to use the formatted object directly)
+// larry.setEyes({
+//   left: { volume: 1.5 },
+//   right: { volume: 1.51 }
+// });
