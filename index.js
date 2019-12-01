@@ -88,18 +88,62 @@ class FrogBuilder {
     }
     return this;
   }
+  setHeart(heart) {
+    if (typeof heart !== "object") {
+      throw new Error("heart is not an object");
+    }
+    if (!("rate" in heart)) {
+      throw new Error("rate in heart is undefined");
+    }
+    // Assume the caller wants to pass in a callback to receive the current frog's weight and height that he or she has set
+    //    previously so they can calculate the heart object on the fly. Useful for loops of collections
+    if (typeof heart === "function") {
+      this.heart = heart({
+        weight: this.weight,
+        height: this.height
+      });
+    } else {
+      this.heart = heart;
+    }
+    return this;
+  }
+  validate() {
+    const requiredFields = [
+      "name",
+      "gender",
+      "eyes",
+      "legs",
+      "scent",
+      "tongue",
+      "heart"
+    ];
+    for (let index = 0; index < requiredFields.length; index++) {
+      const field = requiredFields[index];
+      // Immediately return false since we are missing a parameter
+      if (!(field in this)) {
+        return false;
+      }
+    }
+    return true;
+  }
   build() {
-    return new Frog(
-      this.name,
-      this.gender,
-      this.eyes,
-      this.legs,
-      this.scent,
-      this.tongue,
-      this.heart,
-      this.weight,
-      this.height
-    );
+    const isValid = this.validate(this);
+    if (isValid) {
+      return new Frog(
+        this.name,
+        this.gender,
+        this.eyes,
+        this.legs,
+        this.scent,
+        this.tongue,
+        this.heart,
+        this.weight,
+        this.height
+      );
+    } else {
+      // just going to log to console
+      console.error("Parameters are invalid");
+    }
   }
 }
 
