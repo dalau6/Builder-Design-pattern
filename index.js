@@ -42,7 +42,28 @@ class FrogBuilder {
     this.gender = gender;
   }
   formatEyesCorrectly(eyes) {
-    return Array.isArray(eyes) ? { left: eyes[0], right: eyes[1] } : eyes;
+    // Assume the caller wants to pass in an array where the first index is the left
+    //    eye, and the 2nd is the right
+    if (Array.isArray(eyes)) {
+      return {
+        left: eyes[0],
+        right: eyes[1]
+      };
+    }
+    // Assume that the caller wants to use a number to indicate that both eyes have the exact same volume
+    if (typeof eyes === "number") {
+      return {
+        left: { volume: eyes },
+        right: { volume: eyes }
+      };
+    }
+    // Assume that the caller might be unsure of what to set the eyes at this current moment, so he expects
+    //    the current instance as arguments to their callback handler so they can calculate the eyes by themselves
+    if (typeof eyes === "function") {
+      return eyes(this);
+    }
+    // Assume the caller is passing in the directly formatted object if the code gets here
+    return eyes;
   }
   setEyes(eyes) {
     this.eyes = this.formatEyesCorrectly(eyes);
