@@ -180,6 +180,17 @@ class FrogBuilder {
   }
 }
 
+class ToadBuilder {
+  constructor(frogBuilder) {
+    this.builder = frogBuilder
+    this.createToad()
+  }
+  
+  createToad() {
+    return this.builder.setHabitat('land').setSkin('dry')
+  }
+}
+  
 // frog
 const sally = new FrogBuilder("sally", "female")
   .setEyes([{ volume: 1.1 }, { volume: 1.12 }])
@@ -199,7 +210,9 @@ const sally = new FrogBuilder("sally", "female")
   .build();
 
 // toad
-const kelly = new FrogBuilder("kelly", "female")
+let kelly = new FrogBuilder("kelly", "female")
+
+kelly = new ToadBuilder(kelly).builder
   .setEyes([{ volume: 1.1 }, { volume: 1.12 }])
   .setScent("black ice")
   .setHeart({ rate: 11 })
@@ -212,27 +225,25 @@ const kelly = new FrogBuilder("kelly", "female")
     { size: "small" }
   ])
   .setTongue({ width: 12.5, color: "olive", type: "round" })
-  .setHabitat("land")
-  .setSkin("dry")
   .build();
 
 // toad
-const mike = new FrogBuilder("mike", "male")
+let mike = new FrogBuilder("mike", "male")
+
+mike = new ToadBuilder(mike).builder
   .setEyes([{ volume: 1.1 }, { volume: 1.12 }])
-  .setScent("smelly socks")
+  .setScent('smelly socks')
   .setHeart({ rate: 15 })
   .setWeight(12)
   .setHeight(5.2)
   .setLegs([
-    { size: "medium" },
-    { size: "medium" },
-    { size: "medium" },
-    { size: "medium" }
+    { size: 'medium' },
+    { size: 'medium' },
+    { size: 'medium' },
+    { size: 'medium' },
   ])
-  .setTongue({ width: 12.5, color: "olive", type: "round" })
-  .setHabitat("land")
-  .setSkin("dry")
-  .build();
+  .setTongue({ width: 12.5, color: 'olive', type: 'round' })
+  .build()
 
 // const larry = new FrogBuilder("larry", "male")
 //   .setEyes([{ volume: 1.1 }, { volume: 1.12 }])
